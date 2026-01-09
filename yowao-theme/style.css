@@ -1,0 +1,15 @@
+/*
+Theme Name: Yowao Navigation Pro
+Theme URI: https://www.yowao.com
+Author: 熊哥
+Author URI: https://www.yowao.com
+Description: 【v1.0.0 正式版】专为极客打造的“棱镜”风格导航主题。集成了银行级安全防护 (CSRF)、国内极速访问优化 (Cravatar/本地化)、私有收藏夹、iOS 锁屏风格时钟及 3D 玻璃拟态设计。
+Version: 1.0.0
+Tags: navigation, dark, glassmorphism, portfolio, grid-layout, china-optimized
+Text Domain: yowao
+*/
+
+/* * 核心样式说明：
+ * 本主题使用 Tailwind CSS (v3.4) CDN 加载核心样式。
+ * 此文件主要用于 WordPress 识别主题元数据及少量的自定义覆盖。
+ */
