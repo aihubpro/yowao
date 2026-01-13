@@ -21,14 +21,31 @@ $frontend_nonce = wp_create_nonce('yowao_frontend_action');
 // 背景逻辑
 $custom_bg = $login ? get_user_meta($u->ID, 'yowao_bg', true) : '';
 $final_bg = '';
+
 if ($custom_bg) {
     $final_bg = $custom_bg;
 } else {
-    $bg_files = glob($root . '/assets/img/bg/*.{jpg,png,jpeg,webp}', GLOB_BRACE);
-    if ($bg_files && count($bg_files) > 0) {
+    // 1. 定义背景图目录
+    $bg_path = $root . '/assets/img/bg/';
+    $bg_files = array();
+
+    // 2. 兼容性循环查找（防止 GLOB_BRACE 报错）
+    if (is_dir($bg_path)) {
+        $extensions = array('jpg', 'png', 'jpeg', 'webp');
+        foreach ($extensions as $ext) {
+            $files = glob($bg_path . '*.' . $ext);
+            if ($files !== false && !empty($files)) {
+                $bg_files = array_merge($bg_files, $files);
+            }
+        }
+    }
+
+    // 3. 随机选择或使用兜底图
+    if (!empty($bg_files)) {
         $random_file = $bg_files[array_rand($bg_files)];
         $final_bg = $uri . '/assets/img/bg/' . basename($random_file);
     } else {
+        // 默认兜底图
         $final_bg = 'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?q=80&w=2070';
     }
 }
